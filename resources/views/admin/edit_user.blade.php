@@ -1,0 +1,104 @@
+@extends('layouts.layout')
+@section('content')
+<!-- ============================================================== -->
+<!-- Start right Content here -->
+<!-- ============================================================== -->
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+            <!-- start page title -->
+            <div class="row align-items-center">
+                <div class="col-sm-6">
+                    <div class="page-title-box">
+                        <h4 class="font-size-18">Edit User</h4>
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item"><a href="/">DevaSmriti</a></li>
+                            <li class="breadcrumb-item"><a href="admin_management">Admin Management</a></li>
+                            <li class="breadcrumb-item active">Edit User</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="float-right">
+                        <a href="user_management" class="btn btn-primary waves-effect waves-light">
+                            <i class="mdi mdi-arrow-left mr-2"></i> Back
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <!-- <h4 class="card-title">Example</h4> -->
+                            <form action="/update_user/{{ $user->id }}" class=" repeater"
+                                enctype="multipart/form-data" method="post">
+                                <input name="_token" type="hidden" value="{{ csrf_token() }}" />
+								
+                                    <div data-repeater-item class="row">
+                                        <div class="form-group col-lg-3">
+										<label for="fname">First Name</label>
+										<input type="text" id="fname" name="fname" class="form-control @error('fname') is-invalid @enderror"
+											placeholder="Enter First Name" value="{{ $user->fname }}"/>
+										@error('fname')
+											<div class="alert alert-danger">{{ $message }}</div>
+										@enderror
+
+									</div>
+									<div class="form-group col-lg-3">
+										<label for="lname">Last Name</label>
+										<input type="text" id="lname" name="lname" class="form-control"
+											placeholder="Enter Last Name" value="{{ $user->lname }}"/>
+									</div>
+
+									<div class="form-group col-lg-3">
+										<label for="email">Email</label>
+										<input type="email" id="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Enter Email" value="{{ $user->email }}" />
+										@error('email')
+											<div class="alert alert-danger">{{ $message }}</div>
+										@enderror
+									</div>
+
+									<div class="form-group col-lg-3">
+										<label for="mobile_number">Phone</label>
+										<input type="text" name="mobile_number" id="mobile_number"
+											class="form-control" placeholder="Enter Mobile No" value="{{ $user->mobile_number }}"/>
+										@error('mobile_number')
+											<div class="alert alert-danger">{{ $message }}</div>
+										@enderror
+									</div>
+									
+									<div class="form-group col-lg-3">
+										<label for="file">Profile Pic</label>
+										<input type="file" name="file" id="file"
+											class="form-control" placeholder="Enter Profile Pic" />
+											<img src="{{ asset('public/uploads/users/'.$user->profile_pic_name) }}" alt="">
+									</div>
+									<div class="form-group col-lg-3">
+										<label for="dob">DOB</label>
+										<input type="date" name="dob" id="dob"
+											class="form-control" placeholder="Enter Date Of Birth"  value="{{date('Y-m-d', strtotime($user->dob))}}"/>
+									</div>
+									<div class="form-group col-lg-3">
+										<label for="about_me">About Me</label>
+										<textarea name="about_me" id="about_me"
+											class="form-control" placeholder="Enter About Me">{{ $user->about_me }}</textarea>
+									</div>
+                                    </div>
+									
+                                <div class="submit_cnt">
+                                    <button class="btn btn-primary waves-effect waves-light"
+                                        type="submit">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+
+    @endsection
