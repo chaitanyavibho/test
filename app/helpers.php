@@ -192,7 +192,7 @@ if(!function_exists('SendEmail')){
 if(!function_exists('WEB_API_LINK')){
     function WEB_API_LINK()
     {
-        return 'https://devasmriti.com/';
+        return 'https://devasmrithi.netlify.app';
     }
 }
 if(!function_exists('encrypt')){
